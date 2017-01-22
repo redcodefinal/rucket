@@ -4,7 +4,7 @@ class GPIOPin
   attr_reader :pin
   attr_reader :mode
 
-  def intialize(pin, mode)
+  def initialize(pin, mode)
     @pin = pin
     @mode = mode
 
