@@ -1,10 +1,12 @@
 require "rpi_gpio"
 require "require_all"
 require "time"
+require "ascii_charts"
 
-require_relative "rucket/version"
+require_relative "rucket/*"
 
 class Rucket
+  MAX_ENTRIES = 24
   attr_reader :fans
   attr_reader :lights
 
@@ -26,6 +28,7 @@ class Rucket
     @last_dht_update = Time.now - dht_update_time
     @start_time = options[:start_time] || Time.parse("8:00")
     @end_time = options[:end_time] || Time.parse("24:00")
+    @dht = DHT11.new(0)
     @fans = {}
     @lights = {}
   end
@@ -34,17 +37,17 @@ class Rucket
     fans[name] = Fan.new(pin)
   end
 
-  def add_fan_pwm(name, pin, pwm_pin)
-    fans[name] = FanPWM.new(pin, pwm_pin)
-  end
+  # def add_fan_pwm(name, pin, pwm_pin)
+  #   fans[name] = FanPWM.new(pin, pwm_pin)
+  # end
 
   def add_light(name, pin)
     lights[name] = Light.new(pin)
   end
 
-  def add_light_pwm(name, pin)
-    lights[name] = LightPWM.new(pin, pwm_pin)
-  end
+  # def add_light_pwm(name, pin)
+  #   lights[name] = LightPWM.new(pin, pwm_pin)
+  # end
 
   def off?
     not on?
@@ -63,12 +66,38 @@ class Rucket
   end
 
   def run_loop
-    if (start_time..end_time).cover?(Time.now) and off?
-      turn_on
-    elsif !(start_time..end_time).cover?(Time.now) and on?
-      turn_off
+    Signal.trap("INT") do
+      puts "CAUGHT SIGINT!"
+      RPi::GPIO.clean_up
+      exit
     end
-
     
+    begin
+      if (start_time..end_time).cover?(Time.now) and off?
+        turn_on
+      elsif !(start_time..end_time).cover?(Time.now) and on?
+        turn_off
+      end
+
+      if (Time.now - last_dht_update) > dht_update_time
+        @temps ||= [] 
+        @temps << (temp = dht.get_temp)
+        @temps.slice!(0) if @temps.count > MAX_ENTRIES
+
+        @humids ||= [] 
+        @humids << (humid = dht.get_humidity)
+        @humids.slice!(0) if @humids.count > MAX_ENTRIES
+
+        graph1 = AsciiCharts::Cartesian.new((0...MAX_ENTRIES).to_a.map{|x| [x, last_dht_temps.reverse[[x]]}, bar: true, title: "TEMP", y_step_size: 10, max_y_vals: 10).draw
+        graph2 = AsciiCharts::Cartesian.new((0...MAX_ENTRIES).to_a.map{|x| [x, last_dht_humids.reverse[x]]}, bar: true, title: "HUMID", y_step_size: 10, max_y_vals: 10).draw
+        
+        puts graph1
+        puts graph2
+        puts "TEMP: #{temp}F HUMID: #{humid}%"
+        puts "Time: #{Time.now}"
+      end
+    ensure
+      RPi::GPIO.clean_up
+    end
   end
 end

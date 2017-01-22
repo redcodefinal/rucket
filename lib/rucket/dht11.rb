@@ -21,7 +21,7 @@ class DHT11
   attr_reader :device_path
 
   def initialize(iio_device_number)
-    @device_path = INDUSTRIAL_IO_DIR + DEVICE_NAME + iio_device_number + ?/ 
+    @device_path = INDUSTRIAL_IO_DIR + DEVICE_NAME + iio_device_number.to_s + ?/ 
   end
 
   def get_temp

@@ -8,7 +8,7 @@ class GPIOPin
     @pin = pin
     @mode = mode
 
-    setup pin, as: mode
+    RPi::GPIO.setup pin, as: mode
   end
 
   def set_high
