@@ -3,7 +3,7 @@ require "open3"
 class DHT11
   INDUSTRIAL_IO_DIR = "/sys/bus/iio/devices/"
   TEMP_FILE = "in_temp_input"
-  HUMIDITY_FILE = "in_humidity_input"
+  HUMIDITY_FILE = "in_humidityrelative_input"
   DEVICE_NAME = "iio:device"
 
 
@@ -25,14 +25,16 @@ class DHT11
   end
 
   def get_temp
-    while (temp = Open3.capture3("cat #{DHT_TEMP}").first).empty?
+    while (temp = Open3.capture3("cat #{device_path + TEMP_FILE}").first).empty?
+      sleep 0.1
     end
 
     (temp.chars.first(2).join.to_i*1.8 + 32)
   end
 
   def get_humidity
-    while (humid = Open3.capture3("cat #{DHT_HUMID}").first).empty?
+    while (humid = Open3.capture3("cat #{device_path + HUMIDITY_FILE}").first).empty?
+      sleep 0.1
     end
 
     humid.chars.first(2).join.to_i
