@@ -68,7 +68,6 @@ class Rucket
   def run_loop
     Signal.trap("INT") do
       puts "CAUGHT SIGINT!"
-      RPi::GPIO.clean_up
       exit
     end
 

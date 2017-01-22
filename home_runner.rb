@@ -1,4 +1,4 @@
-require "./lib/rucket"
+require_relative "./lib/rucket"
 
 r = Rucket.new
 r.add_light(:main, 6)
