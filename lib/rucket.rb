@@ -88,8 +88,8 @@ class Rucket
         @humids << (humid = dht.get_humidity)
         @humids.slice!(0) if @humids.count > MAX_ENTRIES
 
-        graph1 = AsciiCharts::Cartesian.new((0...MAX_ENTRIES).to_a.map{|x| [x, @temps.reverse[x]]}, bar: true, title: "TEMP", y_step_size: 10, max_y_vals: 10).draw
-        graph2 = AsciiCharts::Cartesian.new((0...MAX_ENTRIES).to_a.map{|x| [x, @humids.reverse[x]]}, bar: true, title: "HUMID", y_step_size: 10, max_y_vals: 10).draw
+        graph1 = AsciiCharts::Cartesian.new((0...MAX_ENTRIES).to_a.map{|x| [x, @temps.reverse[x]]}, bar: true, title: "TEMP", y_step_size: 10, max_y_vals: 100).draw
+        graph2 = AsciiCharts::Cartesian.new((0...MAX_ENTRIES).to_a.map{|x| [x, @humids.reverse[x]]}, bar: true, title: "HUMID", y_step_size: 10, max_y_vals: 100).draw
         
         puts graph1
         puts graph2
