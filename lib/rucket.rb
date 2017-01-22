@@ -6,7 +6,7 @@ require "ascii_charts"
 require_rel "rucket/*"
 
 class Rucket
-  MAX_ENTRIES = 24
+  MAX_ENTRIES = 30
   attr_reader :fans
   attr_reader :lights
 
@@ -23,8 +23,8 @@ class Rucket
   def initialize(options = {})
     #RPi::GPIO.set_warnings false
     RPi::GPIO.set_numbering :bcm
-    @on = options[:on] || true
-    @dht_update_time = options[:dht_update_time] || 60*15
+    @on = options[:on] || false
+    @dht_update_time = options[:dht_update_time] || 60*30
     @last_dht_update = Time.now - dht_update_time
     @start_time = options[:start_time] || Time.parse("8:00")
     @end_time = options[:end_time] || Time.parse("24:00")
@@ -55,14 +55,14 @@ class Rucket
 
   def turn_on
     @on = true
-    fans.each(&:turn_on)
-    lights.each(&:turn_on)
+    fans.each {|name, fan| fan.turn_on}
+    lights.each {|name, light| light.turn_on}
   end
 
   def turn_off
     @on = false
-    fans.each(&:turn_on)
-    lights.each(&:turn_on)
+    fans.each {|name, fan| fan.turn_off}
+    lights.each {|name, light| light.turn_off}
   end
 
   def run_loop
