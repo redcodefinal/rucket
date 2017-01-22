@@ -22,7 +22,7 @@ class Rucket
   
   def initialize(options = {})
     #RPi::GPIO.set_warnings false
-    RPi::set_numbering :bcm
+    RPi::GPIO.set_numbering :bcm
     @on = options[:on] || true
     @dht_update_time = options[:dht_update_time] || 60*15
     @last_dht_update = Time.now - dht_update_time
