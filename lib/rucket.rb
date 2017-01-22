@@ -72,28 +72,30 @@ class Rucket
     end
 
     begin
-      if (start_time..end_time).cover?(Time.now) and off?
-        turn_on
-      elsif !(start_time..end_time).cover?(Time.now) and on?
-        turn_off
-      end
+      loop do
+        if (start_time..end_time).cover?(Time.now) and off?
+          turn_on
+        elsif !(start_time..end_time).cover?(Time.now) and on?
+          turn_off
+        end
 
-      if (Time.now - last_dht_update) > dht_update_time
-        @temps ||= Array.new(MAX_ENTRIES, 0)
-        @temps << (temp = dht.get_temp)
-        @temps.slice!(0) if @temps.count > MAX_ENTRIES
+        if (Time.now - last_dht_update) > dht_update_time
+          @temps ||= Array.new(MAX_ENTRIES, 0)
+          @temps << (temp = dht.get_temp)
+          @temps.slice!(0) if @temps.count > MAX_ENTRIES
 
-        @humids ||= Array.new(MAX_ENTRIES, 0)
-        @humids << (humid = dht.get_humidity)
-        @humids.slice!(0) if @humids.count > MAX_ENTRIES
+          @humids ||= Array.new(MAX_ENTRIES, 0)
+          @humids << (humid = dht.get_humidity)
+          @humids.slice!(0) if @humids.count > MAX_ENTRIES
 
-        graph1 = AsciiCharts::Cartesian.new((0...MAX_ENTRIES).to_a.map{|x| [x, @temps.reverse[x]]}, bar: true, title: "TEMP", y_step_size: 10, max_y_vals: 100).draw
-        graph2 = AsciiCharts::Cartesian.new((0...MAX_ENTRIES).to_a.map{|x| [x, @humids.reverse[x]]}, bar: true, title: "HUMID", y_step_size: 10, max_y_vals: 100).draw
-        
-        puts graph1
-        puts graph2
-        puts "TEMP: #{temp}F HUMID: #{humid}%"
-        puts "Time: #{Time.now}"
+          graph1 = AsciiCharts::Cartesian.new((0...MAX_ENTRIES).to_a.map{|x| [x, @temps.reverse[x]]}, bar: true, title: "TEMP", y_step_size: 10, max_y_vals: 100).draw
+          graph2 = AsciiCharts::Cartesian.new((0...MAX_ENTRIES).to_a.map{|x| [x, @humids.reverse[x]]}, bar: true, title: "HUMID", y_step_size: 10, max_y_vals: 100).draw
+          
+          puts graph1
+          puts graph2
+          puts "TEMP: #{temp}F HUMID: #{humid}%"
+          puts "Time: #{Time.now}"
+        end
       end
     ensure
       RPi::GPIO.clean_up
