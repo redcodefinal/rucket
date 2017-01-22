@@ -15,7 +15,7 @@ class Rucket
   attr_accessor :dht_update_time
 
   attr_reader :on
-  alias_method :on, :on?
+  alias_method :on?, :on
 
   attr_accessor :start_time
   attr_accessor :end_time
