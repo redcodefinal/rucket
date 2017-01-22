@@ -80,6 +80,7 @@ class Rucket
         end
 
         if (Time.now - last_dht_update) > dht_update_time
+          last_dht_update = Time.now
           @temps ||= Array.new(MAX_ENTRIES, 0)
           @temps << (temp = dht.get_temp)
           @temps.slice!(0) if @temps.count > MAX_ENTRIES
