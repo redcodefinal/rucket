@@ -2,7 +2,7 @@ class Light
   attr_reader :pin
   
   def initialize(pin)
-    @pin = GPIOPin.new pin 
+    @pin = GPIOPin.new(pin, :output)
   end
 
   def turn_on
