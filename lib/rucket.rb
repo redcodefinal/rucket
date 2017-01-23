@@ -74,9 +74,9 @@ class Rucket
     begin
       loop do
         time = Time.now
-        start_time = Time.new(time.year, time.month, time.day, start_time.hour, start_time.min, start_time.sec)
-        end_time = Time.new(time.year, time.month, time.day, end_time.hour, end_time.min, end_time.sec)\
-        
+        @start_time = Time.new(time.year, time.month, time.day, start_time.hour, start_time.min, start_time.sec)
+        @end_time = Time.new(time.year, time.month, time.day, end_time.hour, end_time.min, end_time.sec)
+
         if (start_time..end_time).cover?(Time.now) and off?
           turn_on
         elsif !(start_time..end_time).cover?(Time.now) and on?
