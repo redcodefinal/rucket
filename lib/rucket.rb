@@ -27,7 +27,7 @@ class Rucket
     @dht_update_time = options[:dht_update_time] || 60*30
     @last_dht_update = Time.now - dht_update_time
     @start_time = options[:start_time] || Time.parse("8:00")
-    @end_time = options[:end_time] || Time.parse("24:00")
+    @end_time = options[:end_time] || Time.parse("23:59")
     @dht = DHT11.new(0)
     @fans = {}
     @lights = {}
@@ -73,6 +73,10 @@ class Rucket
 
     begin
       loop do
+        time = Time.now
+        start_time = Time.new(time.year, time.month, time.day, start_time.hour, start_time.min, start_time.sec)
+        end_time = Time.new(time.year, time.month, time.day, end_time.hour, end_time.min, end_time.sec)\
+        
         if (start_time..end_time).cover?(Time.now) and off?
           turn_on
         elsif !(start_time..end_time).cover?(Time.now) and on?
