@@ -24,12 +24,20 @@ class DHT11
     @device_path = INDUSTRIAL_IO_DIR + DEVICE_NAME + iio_device_number.to_s + ?/ 
   end
 
-  def get_temp
+  def get_temp_f
     while (temp = Open3.capture3("cat #{device_path + TEMP_FILE}").first).empty?
       sleep 0.1
     end
 
     (temp.chars.first(2).join.to_i*1.8 + 32)
+  end
+
+  def get_temp_c
+    while (temp = Open3.capture3("cat #{device_path + TEMP_FILE}").first).empty?
+      sleep 0.1
+    end
+
+    temp.chars.first(2).join.to_i
   end
 
   def get_humidity
