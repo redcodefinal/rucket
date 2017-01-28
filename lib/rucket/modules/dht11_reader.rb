@@ -4,13 +4,13 @@ require_relative '../rucket_module'
 require_relative '../dht11'
 
 class DHT11Reader < RucketModule
-  attr_reader :dht11
+  attr_reader :pin
   attr_reader :last_dht_update
   attr_accessor :dht_update_time
 
-  def initialize(rucket, iio_device = 0, update_time = 60*30)
+  def initialize(rucket, pin = 4, update_time = 60*30)
     super rucket
-    @dht11 = DHT11.new iio_device
+    @dht11_pin = pin
     @dht_update_time = update_time
     @last_dht_update = Time.now - dht_update_time
   end
@@ -19,11 +19,11 @@ class DHT11Reader < RucketModule
     if (Time.now - last_dht_update) > dht_update_time
       @last_dht_update = Time.now
       @temps ||= Array.new(MAX_ENTRIES, 0)
-      @temps << (temp = dht11.get_temp_f)
+      @temps << (temp = DhtSensor.read(pin, 11).temp_f)
       @temps.slice!(0) if @temps.count > MAX_ENTRIES
 
       @humids ||= Array.new(MAX_ENTRIES, 0)
-      @humids << (humid = dht11.get_humidity)
+      @humids << (humid = DhtSensor.read(pin, 11).humidity)
       @humids.slice!(0) if @humids.count > MAX_ENTRIES
 
       graph1 = AsciiCharts::Cartesian.new((0...MAX_ENTRIES).to_a.map{|x| [x, @temps.reverse[x]]}, bar: true, title: "TEMP", y_step_size: 10, max_y_vals: 100).draw

@@ -7,6 +7,6 @@ r.add_fan(:heatsink_fan, 19)
 r.add_fan(:intake, 26)
 
 r.add_module(Timer.new(r))
-r.add_module(DHT11Reader.new(r))
+r.add_module(DHT11Reader.new(r, 5))
 
 r.run_loop
