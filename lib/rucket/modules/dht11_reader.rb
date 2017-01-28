@@ -6,18 +6,18 @@ require_relative '../rucket_module'
 class DHT11Reader < RucketModule
   MAX_ENTRIES = 30
   attr_reader :pin
-  attr_reader :last_dht_update
-  attr_accessor :dht_update_time
+  attr_reader :last_update
+  attr_accessor :update_time
 
   def initialize(rucket, pin = 4, update_time = 60*30)
     super rucket
-    @dht11_pin = pin
-    @dht_update_time = update_time
-    @last_dht_update = Time.now - dht_update_time
+    @pin = pin
+    @update_time = update_time
+    @last_update = Time.now - update_time
   end
 
   def main_loop
-    if (Time.now - last_dht_update) > dht_update_time
+    if (Time.now - dht_update) > update_time
       @last_dht_update = Time.now
       @temps ||= Array.new(MAX_ENTRIES, 0)
       @temps << (temp = DhtSensor.read(pin, 11).temp_f)
