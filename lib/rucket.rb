@@ -3,7 +3,8 @@ require "require_all"
 require "time"
 require "ascii_charts"
 
-require_rel "rucket/*"
+require_rel "rucket/*.rb"
+require_rel "rucket/modules/*.rb"
 
 class Rucket
   MAX_ENTRIES = 30
