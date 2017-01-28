@@ -67,7 +67,7 @@ class Rucket
 
     begin
       loop do
-        modules.each(&:main_loop)
+        @modules.values.each(&:main_loop)
       end
     ensure
       RPi::GPIO.clean_up
