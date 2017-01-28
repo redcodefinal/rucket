@@ -4,7 +4,8 @@ class Timer < RucketModule
   attr_accessor :start_time
   attr_accessor :end_time
 
-  def initialize(start_time = "08:00", end_time = "23:59")
+  def initialize(rucket, start_time = "08:00", end_time = "23:59")
+    super rucket
     @start_time = start_time
     @end_time = end_time
   end  
