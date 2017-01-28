@@ -4,6 +4,7 @@ require "dht-sensor-ffi"
 require_relative '../rucket_module'
 
 class DHT11Reader < RucketModule
+  MAX_ENTRIES = 30
   attr_reader :pin
   attr_reader :last_dht_update
   attr_accessor :dht_update_time
