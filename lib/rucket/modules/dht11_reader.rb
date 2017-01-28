@@ -18,7 +18,7 @@ class DHT11Reader < RucketModule
 
   def main_loop
     if (Time.now - last_update) > update_time
-      @last_dht_update = Time.now
+      @last_update = Time.now
       @temps ||= Array.new(MAX_ENTRIES, 0)
       @temps << (temp = DhtSensor.read(pin, 11).temp_f)
       @temps.slice!(0) if @temps.count > MAX_ENTRIES
