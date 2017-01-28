@@ -2,7 +2,6 @@ require "ascii_charts"
 require "dht-sensor-ffi"
 
 require_relative '../rucket_module'
-require_relative '../dht11'
 
 class DHT11Reader < RucketModule
   attr_reader :pin
