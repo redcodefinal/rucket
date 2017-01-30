@@ -22,7 +22,7 @@ __END__
 <html>
   <head>
     <title>SINATRA TEST!</title>
-    <meta http-equiv="refresh" content="5; URL=http://localhost:4567">
+    <meta http-equiv="refresh" content="60">
   </head>
   <body>
     <img src="chart.png"></img>
