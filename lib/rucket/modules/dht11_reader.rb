@@ -9,12 +9,14 @@ class DHT11Reader < RucketModule
   attr_reader :pin
   attr_reader :last_update
   attr_accessor :update_time
+  attr_reader :temp, :humidity
 
   def initialize(rucket, pin = 4, update_time = 60*30)
     super rucket
     @pin = pin
     @update_time = update_time
     @last_update = Time.now - update_time
+    main_loop
   end
 
   def main_loop
@@ -46,6 +48,8 @@ class DHT11Reader < RucketModule
 
       cursor.move_to(0, height-1)
       print "TEMP: #{temp}F HUMID: #{humid}% Time: #{Time.now}"
+      @temp = temp
+      @humiditiy = humid
     end
   end
 end
