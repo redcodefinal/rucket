@@ -34,7 +34,7 @@ class DHT11Reader < RucketModule
                    title: "DHT",
                    data: [@temps, @humids],
                    size: "400x300",
-                   filename: "/home/pi/rucket/chart.png",
+                   filename: "/home/pi/rucket/public/chart.png",
                    line_colors: 'ff0000,0000ff',
                    legend: ["Tempurature", "Humidity"],
                    axis_with_labels: ['Time', 'Value'])
