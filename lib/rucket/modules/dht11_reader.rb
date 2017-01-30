@@ -1,5 +1,6 @@
 require "ascii_charts"
 require "dht-sensor-ffi"
+require "tty"
 
 require_relative '../rucket_module'
 
@@ -18,6 +19,13 @@ class DHT11Reader < RucketModule
 
   def main_loop
     if (Time.now - last_update) > update_time
+      #detect the screen size
+      width = TTY::Screen.width
+      height = TTY::Screen.height
+      #Move cursor to upper right
+      cursor = TTY::Cursor
+      cursor.move_to
+
       @last_update = Time.now
       @temps ||= Array.new(MAX_ENTRIES, 0)
       @temps << (temp = DhtSensor.read(pin, 11).temp_f)
@@ -27,13 +35,16 @@ class DHT11Reader < RucketModule
       @humids << (humid = DhtSensor.read(pin, 11).humidity)
       @humids.slice!(0) if @humids.count > MAX_ENTRIES
 
+      pastel = Pastel.new
+       
       graph1 = AsciiCharts::Cartesian.new((0...MAX_ENTRIES).to_a.map{|x| [x, @temps.reverse[x]]}, bar: true, title: "TEMP", y_step_size: 10, max_y_vals: 100).draw
       graph2 = AsciiCharts::Cartesian.new((0...MAX_ENTRIES).to_a.map{|x| [x, @humids.reverse[x]]}, bar: true, title: "HUMID", y_step_size: 10, max_y_vals: 100).draw
       
-      puts graph1
-      puts graph2
-      puts "TEMP: #{temp}F HUMID: #{humid}%"
-      puts "Time: #{Time.now}"
+      print pastel.red(graph1)
+      print pastel.blue(graph2)
+
+      cursor.move_to(0, height-1)
+      print "TEMP: #{temp}F HUMID: #{humid}% Time: #{Time.now}"
     end
   end
 end
