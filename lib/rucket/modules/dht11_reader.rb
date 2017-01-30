@@ -38,6 +38,7 @@ class DHT11Reader < RucketModule
                    line_colors: 'ff0000,0000ff',
                    legend: ["Tempurature", "Humidity"],
                    axis_with_labels: ['Time', 'Value'])
+      chart.file
 
       @temp = temp
       @humiditiy = humid
