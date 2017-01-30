@@ -25,6 +25,6 @@ __END__
     <meta http-equiv="refresh" content="5; URL=http://localhost:4567">
   </head>
   <body>
-    <img src="/home/pi/rucket/chart.png"></img>
+    <img src="/home/pi/rucket/public/chart.png"></img>
   </body>
 </html>
