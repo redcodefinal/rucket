@@ -61,7 +61,6 @@ class Rucket
 
   def update
     @modules.values.each(&:main_loop)
-    update_event.call
   end
 
   def run_loop
