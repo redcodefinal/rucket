@@ -33,7 +33,7 @@ class DHT11Reader < RucketModule
       chart = Gchart.new(type: "line",
                    title: "DHT",
                    data: [@temps, @humids],
-                   size: "400x300",
+                   size: "400x250",
                    filename: "/home/pi/rucket/public/chart.png",
                    line_colors: 'ff0000,0000ff',
                    legend: ["Tempurature", "Humidity"],

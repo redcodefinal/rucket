@@ -26,5 +26,7 @@ __END__
   </head>
   <body>
     <img src="chart.png"></img>
+    TEMP: <%= $r[:dht].temp %>F   HUMIDITY: <%= $r[:dht].humidity %>%  
+    <p>TIME: <%= Time.now %></p>
   </body>
 </html>
