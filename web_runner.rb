@@ -25,7 +25,6 @@ __END__
     <meta http-equiv="refresh" content="5; URL=http://localhost:4567">
   </head>
   <body>
-    TEMP: <%= $r[:dht].temp %>F
-    TIME: <%= Time.now %>
+    <img url="chart.png"></img>
   </body>
 </html>
