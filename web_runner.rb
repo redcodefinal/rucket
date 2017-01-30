@@ -25,7 +25,7 @@ __END__
     <meta http-equiv="refresh" content="5; URL=http://localhost:4567">
   </head>
   <body>
-    TEMP: <%= $r.modules[:dht].temp %>F
+    TEMP: <%= $r[:dht].temp %>F
     TIME: <%= Time.now %>
   </body>
 </html>

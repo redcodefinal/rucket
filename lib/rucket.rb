@@ -63,6 +63,10 @@ class Rucket
     @modules.values.each(&:main_loop)
   end
 
+  def [] i
+    @modules[i]
+  end
+
   def run_loop
     Signal.trap("INT") do
       puts "CAUGHT SIGINT!"
