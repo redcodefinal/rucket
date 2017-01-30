@@ -59,6 +59,11 @@ class Rucket
     lights.each {|name, light| light.turn_off}
   end
 
+  def update
+    @modules.values.each(&:main_loop)
+    update_event.call
+  end
+
   def run_loop
     Signal.trap("INT") do
       puts "CAUGHT SIGINT!"
@@ -66,9 +71,7 @@ class Rucket
     end
 
     begin
-      loop do
-        @modules.values.each(&:main_loop)
-      end
+      loop { update }
     ensure
       RPi::GPIO.clean_up
     end
