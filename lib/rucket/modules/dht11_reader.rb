@@ -41,7 +41,7 @@ class DHT11Reader < RucketModule
       chart.file
 
       @temp = temp
-      @humiditiy = humid
+      @humidity = humid
     end
   end
 end
