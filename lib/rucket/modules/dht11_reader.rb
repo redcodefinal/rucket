@@ -23,7 +23,7 @@ class DHT11Reader < RucketModule
       width = TTY::Screen.width
       height = TTY::Screen.height
       #Move cursor to upper right
-      `clear`
+      height.times { puts }
       cursor = TTY::Cursor
       cursor.move_to
 
