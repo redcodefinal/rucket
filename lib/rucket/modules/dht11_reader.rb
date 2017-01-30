@@ -38,7 +38,7 @@ class DHT11Reader < RucketModule
                    line_colors: 'ff0000,0000ff',
                    legend: ["Tempurature", "Humidity"],
                    axis_with_labels: ['Time', 'Value'],
-                   axis_labels: [0..30].to_a
+                   axis_labels: [0..30].to_a,
                    max: 100)
       chart.file
 
