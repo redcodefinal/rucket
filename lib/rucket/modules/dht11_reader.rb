@@ -1,4 +1,4 @@
-require "ascii_charts"
+require "googlecharts"
 require "dht-sensor-ffi"
 require "tty"
 
@@ -21,14 +21,6 @@ class DHT11Reader < RucketModule
 
   def main_loop
     if (Time.now - last_update) > update_time
-      #detect the screen size
-      width = TTY::Screen.width
-      height = TTY::Screen.height
-      #Move cursor to upper right
-      height.times { puts }
-      cursor = TTY::Cursor
-      cursor.move_to
-
       @last_update = Time.now
       @temps ||= Array.new(MAX_ENTRIES, 0)
       @temps << (temp = DhtSensor.read(pin, 11).temp_f)
@@ -37,17 +29,16 @@ class DHT11Reader < RucketModule
       @humids ||= Array.new(MAX_ENTRIES, 0)
       @humids << (humid = DhtSensor.read(pin, 11).humidity)
       @humids.slice!(0) if @humids.count > MAX_ENTRIES
-
-      pastel = Pastel.new
-       
-      graph1 = AsciiCharts::Cartesian.new((0...MAX_ENTRIES).to_a.map{|x| [x, @temps.reverse[x]]}, bar: true, title: "TEMP", y_step_size: 10, max_y_vals: 100).draw
-      graph2 = AsciiCharts::Cartesian.new((0...MAX_ENTRIES).to_a.map{|x| [x, @humids.reverse[x]]}, bar: true, title: "HUMID", y_step_size: 10, max_y_vals: 100).draw
       
-      print pastel.red(graph1)
-      print pastel.blue(graph2)
+      chart = Gchart.new(type: "line",
+                   title: "DHT",
+                   data: [temps, humids],
+                   size: "400x300",
+                   filename: "/home/pi/rucket/chart.png",
+                   line_colors: 'ff0000,0000ff',
+                   legend: ["Tempurature", "Humidity"],
+                   axis_with_labels: ['Time', 'Value'])
 
-      cursor.move_to(0, height-1)
-      print "TEMP: #{temp}F HUMID: #{humid}% Time: #{Time.now}"
       @temp = temp
       @humiditiy = humid
     end
