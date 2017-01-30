@@ -37,7 +37,9 @@ class DHT11Reader < RucketModule
                    filename: "/home/pi/rucket/public/chart.png",
                    line_colors: 'ff0000,0000ff',
                    legend: ["Tempurature", "Humidity"],
-                   axis_with_labels: ['Time', 'Value'])
+                   axis_with_labels: ['Time', 'Value'],
+                   axis_labels: [0..30].to_a
+                   max: 100)
       chart.file
 
       @temp = temp
