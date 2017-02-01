@@ -21,6 +21,7 @@ class Rucket
     @fans = {}
     @lights = {}
     @modules = {}
+    fans.each {|name, fan| fan.turn_on}
   end
 
   def add_module(name, mod)
@@ -49,13 +50,13 @@ class Rucket
 
   def turn_on
     @on = true
-    fans.each {|name, fan| fan.turn_on}
+    #fans.each {|name, fan| fan.turn_on}
     lights.each {|name, light| light.turn_on}
   end
 
   def turn_off
     @on = false
-    fans.each {|name, fan| fan.turn_off}
+    #fans.each {|name, fan| fan.turn_off}
     lights.each {|name, light| light.turn_off}
   end
 
