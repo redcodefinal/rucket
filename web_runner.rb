@@ -3,10 +3,10 @@ require 'erb'
 require_relative "./lib/rucket"
 
 $r = Rucket.new
-$r.add_light(:main, 13)
+$r.add_light(:main, 26)
 $r.add_fan(:exhaust, 19)
 $r.add_fan(:heatsink_fan, 6)
-$r.add_fan(:intake, 26)
+$r.add_fan(:intake, 13)
 $r.fans.each {|n, fan| fan.turn_on}
 $r.turn_on
 
