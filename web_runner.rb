@@ -19,17 +19,12 @@ $r = Rucket.new do
   rmodule :dht, DHT11Reader, 5
 end
 
-begin
-  require 'sinatra'
-  require 'erb'
+require 'sinatra'
+require 'erb'
 
-  get '/' do
-    $r.update
-    erb :index
-  end
-ensure
-  RPi::GPIO.clean_up
-  puts "Cleaned up!"
+get '/' do
+  $r.update
+  erb :index
 end
 
 __END__
