@@ -12,4 +12,12 @@ class Fan
   def turn_off
     @pin.set_high
   end
+
+  def off?
+    @pin.low?
+  end
+
+  def on?
+    @pin.high?
+  end  
 end

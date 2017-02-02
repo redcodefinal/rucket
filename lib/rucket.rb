@@ -7,17 +7,38 @@ require_rel "rucket/*.rb"
 require_rel "rucket/modules/*.rb"
 
 class Rucket
+  class RucketMeta
+    attr_reader :rucket
+    
+    def initialize(rucket)
+      @rucket = rucket
+    end
+
+    def fan(name, gpio_pin, pwm_pin = nil)
+      rucket.add_fan name, gpio_pin
+    end
+
+    def light(name, gpio_pin, pwm_pin = nil)
+      rucket.add_light name, gpio_pin
+    end
+
+    def rmodule(name, klass, *args)
+      rucket.add_module name, klass.new(rucket, *args)
+    end
+  end
+
+  private_constant :RucketMeta
+
   MAX_ENTRIES = 30
   attr_reader :fans
   attr_reader :lights
-
-  attr_reader :on
-  alias_method :on?, :on
   
-  def initialize(options = {})
+  def initialize(options = {}, &block)
+    if block_given?
+      RucketMeta.new(self) &block
+    end
     #RPi::GPIO.set_warnings false
     RPi::GPIO.set_numbering :bcm
-    @on = options[:on] || false
     @fans = {}
     @lights = {}
     @modules = {}
@@ -43,20 +64,22 @@ class Rucket
   #   lights[name] = LightPWM.new(pin, pwm_pin)
   # end
 
-  def off?
-    not on?
+
+
+  def turn_on_lights
+    lights.each {|name, light| light.turn_on if light.off?}
   end
 
-  def turn_on
-    @on = true
-    #fans.each {|name, fan| fan.turn_on}
-    lights.each {|name, light| light.turn_on}
+  def turn_off_lights
+    lights.each {|name, light| light.turn_off if light.on?}
   end
 
-  def turn_off
-    @on = false
-    #fans.each {|name, fan| fan.turn_off}
-    lights.each {|name, light| light.turn_off}
+  def turn_on_fans
+    fans.each {|name, fan| fan.turn_on if light.off?}
+  end
+
+  def turn_off_fans
+    fans.each {|name, fan| fan.turn_off if light.on?}
   end
 
   def update
@@ -80,3 +103,5 @@ class Rucket
     end
   end
 end
+
+

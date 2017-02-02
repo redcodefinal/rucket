@@ -1,21 +1,35 @@
-require 'sinatra'
-require 'erb'
 require_relative "./lib/rucket"
 
-$r = Rucket.new
-$r.add_light(:main, 26)
-$r.add_fan(:exhaust, 19)
-$r.add_fan(:heatsink_fan, 6)
-$r.add_fan(:intake, 13)
-$r.fans.each {|n, fan| fan.turn_on}
-$r.turn_on
+$r = Rucket.new do
+  light :main, 26
+  fan :exhaust, 19
+  fan :heatsink_fan, 6
+  fan :intake, 13
 
-$r.add_module(:timer, Timer.new($r))
-$r.add_module(:dht, DHT11Reader.new($r, 5))
+  on_proc = -> do
+      rucket.turn_on_fans
+      rucket.turn_on_lights
+    end
+  off_proc = -> do
+      rucket.turn_on_fans
+      rucket.turn_off_lights
+    end
 
-get '/' do
-  $r.update
-  erb :index
+  rmodule :timer, Timer, on_proc, off_proc
+  rmodule :dht, DHT11reader, 5
+end
+
+begin
+  require 'sinatra'
+  require 'erb'
+
+  get '/' do
+    $r.update
+    erb :index
+  end
+ensure
+  RPi::GPIO.clean_up
+  puts "Cleaned up!"
 end
 
 __END__
