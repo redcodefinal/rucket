@@ -35,7 +35,7 @@ class Rucket
   
   def initialize(options = {}, &block)
     if block_given?
-      RucketMeta.new(self) &block
+      RucketMeta.new(self).instance_exec &block
     end
     #RPi::GPIO.set_warnings false
     RPi::GPIO.set_numbering :bcm
