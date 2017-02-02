@@ -34,11 +34,12 @@ class Rucket
   attr_reader :lights
   
   def initialize(options = {}, &block)
+    #RPi::GPIO.set_warnings false
+    RPi::GPIO.set_numbering :bcm
+    
     if block_given?
       RucketMeta.new(self).instance_exec &block
     end
-    #RPi::GPIO.set_warnings false
-    RPi::GPIO.set_numbering :bcm
     @fans = {}
     @lights = {}
     @modules = {}
