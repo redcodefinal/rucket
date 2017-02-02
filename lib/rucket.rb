@@ -37,12 +37,13 @@ class Rucket
     #RPi::GPIO.set_warnings false
     RPi::GPIO.set_numbering :bcm
     
-    if block_given?
-      RucketMeta.new(self).instance_exec &block
-    end
     @fans = {}
     @lights = {}
     @modules = {}
+
+    if block_given?
+      RucketMeta.new(self).instance_exec &block
+    end
   end
 
   def add_module(name, mod)
