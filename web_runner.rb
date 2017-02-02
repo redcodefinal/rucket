@@ -16,7 +16,7 @@ $r = Rucket.new do
     end
 
   rmodule :timer, Timer, on_proc, off_proc
-  rmodule :dht, DHT11reader, 5
+  rmodule :dht, DHT11Reader, 5
 end
 
 begin
