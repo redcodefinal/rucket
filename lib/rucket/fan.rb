@@ -2,6 +2,7 @@ class Fan
   attr_reader :pin
   
   def initialize(pin)
+    @on = false
     @pin = GPIOPin.new(pin, :output) 
   end
 
