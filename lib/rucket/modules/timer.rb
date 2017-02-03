@@ -16,6 +16,8 @@ class Timer < RucketModule
     @off_proc = off_proc
     @start_time = start_time
     @end_time = end_time
+
+    instance_exec &off_proc
   end  
 
   def off?
