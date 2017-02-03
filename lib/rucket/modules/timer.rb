@@ -9,7 +9,7 @@ class Timer < RucketModule
   attr_reader :on
   alias_method :on?, :on
 
-  def initialize(rucket)
+  def initialize(rucket, on_proc, off_proc, start_time = "08:00", end_time = "23:59")
     super rucket
     @on = false
     @on_proc = on_proc
