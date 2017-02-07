@@ -1,4 +1,4 @@
-require_relative "./lib/rucketserver"
+require_relative "./lib/rucket_server"
 
 RucketServer.new do
   light :main, 26
