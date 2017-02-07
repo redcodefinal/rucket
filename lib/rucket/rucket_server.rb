@@ -22,9 +22,9 @@ module RucketServer
 
     get '/fans/:action' do
       if params[:action] == 'on'
-        RucketServer.rucket.turn_fans_on
+        RucketServer.rucket.turn_on_fans
       else
-        RucketServer.rucket.turn_fans_off
+        RucketServer.rucket.turn_off_fans
       end
       redirect '/'
     end
