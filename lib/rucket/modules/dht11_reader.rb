@@ -1,6 +1,5 @@
 require "googlecharts"
 require "dht-sensor-ffi"
-require "tty"
 
 require_relative '../rucket_module'
 
@@ -33,8 +32,8 @@ class DHT11Reader < RucketModule
       chart = Gchart.new(type: "line",
                    title: "DHT",
                    data: [@temps, @humids],
-                   size: "400x225",
-                   filename: "/home/pi/rucket/public/chart.png",
+                   size: "400x150",
+                   filename: "/home/pi/rucket/lib/rucket/public/chart.png",
                    line_colors: 'ff0000,0000ff',
                    legend: ["Tempurature", "Humidity"],
                    axis_with_labels: ['Time', 'Value'],

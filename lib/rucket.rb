@@ -84,6 +84,13 @@ class Rucket
     fans.each {|name, fan| fan.turn_off if fan.on?}
   end
 
+  def fans_on?
+    fans.all? {|n, fan| fan.on?}
+  end
+ 
+  def lights_on?
+  end
+
   def update
     @modules.values.each(&:main_loop)
   end

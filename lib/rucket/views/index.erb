@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>SINATRA TEST!</title>
+    <meta http-equiv="refresh" content="600">
+  </head>
+  <body>
+    <% if @rucket.fans_on? %>
+      <a href="http://localhost:4200/fans/off>TURN FANS OFF</a>
+    <%else%>
+      <a href="http://localhost:4200/fans/on>TURN FANS ON</a>
+    <% end %>
+    <br>
+    <img src="chart.png"></img>
+    <p>TEMP: <%= @rucket[:dht].temp %>F   HUMIDITY: <%= @rucket[:dht].humidity %>%  </p>
+    <p>TIME: <%= Time.now %></p>
+  </body>
+</html>

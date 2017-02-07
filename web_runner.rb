@@ -1,6 +1,6 @@
-require_relative "./lib/rucket"
+require_relative "./lib/rucketserver"
 
-$r = Rucket.new do
+RucketServer.new do
   light :main, 26
   fan :exhaust, 19
   fan :heatsink_fan, 6
@@ -18,26 +18,3 @@ $r = Rucket.new do
   rmodule :timer, Timer, on_proc, off_proc
   rmodule :dht, DHT11Reader, 5
 end
-
-require 'sinatra'
-require 'erb'
-
-get '/' do
-  $r.update
-  erb :index
-end
-
-__END__
-
-@@ index
-<html>
-  <head>
-    <title>SINATRA TEST!</title>
-    <meta http-equiv="refresh" content="600">
-  </head>
-  <body>
-    <img src="chart.png"></img>
-    <p>TEMP: <%= $r[:dht].temp %>F   HUMIDITY: <%= $r[:dht].humidity %>%  </p>
-    <p>TIME: <%= Time.now %></p>
-  </body>
-</html>
