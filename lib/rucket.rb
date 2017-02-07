@@ -75,11 +75,11 @@ class Rucket
     lights.each {|name, light| light.turn_off if light.on?}
   end
 
-  def turn_on_fans
+  def turn_fans_on
     fans.each {|name, fan| fan.turn_on if fan.off?}
   end
 
-  def turn_off_fans
+  def turn_fans_off
     fans.each {|name, fan| fan.turn_off if fan.on?}
   end
 
