@@ -17,4 +17,4 @@ RucketServer.new do
 
   rmodule :timer, Timer, on_proc, off_proc
   rmodule :dht, DHT11Reader, 5
-end
+end.run!

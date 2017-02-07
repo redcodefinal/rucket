@@ -6,12 +6,10 @@ require_relative "../rucket"
 class RucketServer < Sinatra::Base
   set :port, 4200
 
-
   attr_reader :rucket
 
   def initialize &block
     @rucket = Rucket.new &block
-    self.run!
   end
 
   get '/' do
