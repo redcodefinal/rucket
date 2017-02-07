@@ -9,7 +9,7 @@ class RucketServer < Sinatra::Base
   attr_reader :rucket
 
   def initialize &block
-    @rucket = Rucket.new &block
+    @rucket = Rucket.new(&block)
   end
 
   get '/' do

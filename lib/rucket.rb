@@ -42,7 +42,7 @@ class Rucket
     @modules = {}
 
     if block_given?
-      RucketMeta.new(self).instance_exec &block
+      RucketMeta.new(self).instance_exec(&block)
     end
   end
 

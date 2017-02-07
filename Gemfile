@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem "rpi_gpio"
-gem "ascii_charts"
 gem "require_all"
 gem "dht-sensor-ffi"
 gem "tty"
+gem "sinatra"
