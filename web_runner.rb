@@ -1,3 +1,8 @@
+require "rubygems"
+require "bundler"
+
+Bundler.require
+
 require_relative "./lib/rucket/rucket_server"
 
 run RucketServer.new do
