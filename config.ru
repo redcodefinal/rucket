@@ -1,9 +1,5 @@
-require "rubygems"
-require "bundler"
-
-Bundler.require
-
-require_relative "./lib/rucket/rucket_server"
+require "require_all"
+require_rel "./lib"
 
 run RucketServer.new do
   light :main, 26
