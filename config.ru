@@ -1,7 +1,7 @@
 require "require_all"
 require_rel "./lib"
 
-run RucketServer.new do
+RucketServer.start do
   light :main, 26
   fan :exhaust, 19
   fan :heatsink_fan, 6
@@ -19,3 +19,5 @@ run RucketServer.new do
   rmodule :timer, Timer, on_proc, off_proc
   rmodule :dht, DHT11Reader, 5
 end
+
+run RucketServer::App

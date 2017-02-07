@@ -1,26 +1,32 @@
 require 'sinatra'
 require 'erb'
 
-class RucketServer < Sinatra::Base
-  set :port, 4200
+module RucketServer
+  extend self
 
   attr_reader :rucket
 
-  def initialize &block
-    @rucket = Rucket.new(&block)
+  def start &block
+    @rucket = Rucket.new &block
   end
 
-  get '/' do
-    @rucket.update
-    erb :index
-  end
- 
-  get '/fans/:action' do
-    if params[:action] == 'on'
-      @rucket.turn_fans_on
-    else
-      @rucket.turn_fans_off
+  class App < Sinatra::Base
+    configure do
+      set :port, 4200
     end
-    redirect '/'
+
+    get '/' do
+      RucketServer.rucket.update
+      erb :index
+    end
+
+    get '/fans/:action' do
+      if params[:action] == 'on'
+        RucketServer.rucket.turn_fans_on
+      else
+        RucketServer.rucket.turn_fans_off
+      end
+      redirect '/'
+    end
   end
 end
