@@ -1,6 +1,6 @@
 require_relative "./lib/rucket/rucket_server"
 
-RucketServer.new do
+run RucketServer.new do
   light :main, 26
   fan :exhaust, 19
   fan :heatsink_fan, 6
@@ -17,4 +17,4 @@ RucketServer.new do
 
   rmodule :timer, Timer, on_proc, off_proc
   rmodule :dht, DHT11Reader, 5
-end.run!
+end
