@@ -1,8 +1,6 @@
 require 'sinatra'
 require 'erb'
 
-require_relative "../rucket"
-
 class RucketServer < Sinatra::Base
   set :port, 4200
 
