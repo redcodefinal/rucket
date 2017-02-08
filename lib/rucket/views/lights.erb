@@ -9,16 +9,16 @@
     <% RucketServer.rucket.lights.each do |name, light| %>
       <table>
         <tr>
-          <th>Name<th>
-          <th><%= name %></th>
+          <td>Name<td>
+          <td><%= name %></td>
         </tr>
         <tr>
-          <th>Pin</th>
-          <th><%= light.pin.pin %></th>
+          <td>Pin</td>
+          <td><%= light.pin.pin %></td>
         </tr>
         <tr>
-          <th>Status</th>
-          <th><%= (light.on? ? "On" : "Off") %></th>
+          <td>Status</td>
+          <td><%= (light.on? ? "On" : "Off") %></td>
         </tr>
         <tr>
           <%= "<a href=\"/lights/#{name}/toggle\">Toggle</a>" %>

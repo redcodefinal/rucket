@@ -29,8 +29,8 @@ module RucketServer
       erb :fans
     end
 
-    get "/fans/:name/toggle" do
-      RucketServer.rucket.fans[params[:name]].toggle
+    get "/fans/:name/toggle" do |name|
+      RucketServer.rucket.fans[name].toggle
       redirect "/fans"
     end  
 
@@ -40,7 +40,7 @@ module RucketServer
     end
 
     get "/lights/:name/toggle" do
-      RucketServer.rucket.lights[params[:name]].toggle
+      RucketServer.rucket.lights[name]].toggle
       redirect "/lights"
     end  
   end
