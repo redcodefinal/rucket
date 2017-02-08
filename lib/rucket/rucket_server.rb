@@ -30,7 +30,7 @@ module RucketServer
     end
 
     get "/fans/:name/toggle" do |name|
-      RucketServer.rucket.fans[name].toggle
+      RucketServer.rucket.fans[name.to_sym].toggle
       redirect "/fans"
     end  
 
@@ -40,7 +40,7 @@ module RucketServer
     end
 
     get "/lights/:name/toggle" do |name|
-      RucketServer.rucket.lights[name].toggle
+      RucketServer.rucket.lights[name.to_sym].toggle
       redirect "/lights"
     end  
   end
