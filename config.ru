@@ -8,12 +8,18 @@ RucketServer.start do
   fan :intake, 13
 
   on_proc = -> do
-      rucket.turn_on_fans
-      rucket.turn_on_lights
+      rucket.fans[:intake].turn_on
+      rucket.fans[:exhaust].turn_on
+
+      rucket.fans[:heatsink_fan].turn_on
+      rucket.lights[:main].turn_on
     end
   off_proc = -> do
-      rucket.turn_on_fans
-      rucket.turn_off_lights
+      rucket.fans[:intake].turn_on
+      rucket.fans[:exhaust].turn_on
+
+      rucket.fans[:heatsink_fan].turn_off
+      rucket.lights[:main].turn_off
     end
 
   rmodule :timer, Timer, on_proc, off_proc

@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <title>RucketServer | Status</title>
+    <meta http-equiv="refresh" content="300">
+  </head>
+  <body>
+    <a href="/fans">FANS</a> | <a href="/lights">LIGHTS</a> | <a href="/control">CONTROL</a>
+    <br>
+    <img src="chart.png"></img>
+    <p>TEMP: <%= RucketServer.rucket[:dht].temp %>F   HUMIDITY: <%= RucketServer.rucket[:dht].humidity %>%  </p>
+    <p>TIME: <%= Time.now %></p>
+  </body>
+</html>

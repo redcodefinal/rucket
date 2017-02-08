@@ -23,4 +23,12 @@ class Fan
   def on?
     @on
   end  
+
+  def toggle
+    if on?
+      turn_off
+    else
+      turn_on
+    end
+  end  
 end

@@ -16,17 +16,32 @@ module RucketServer
     end
 
     get '/' do
-      RucketServer.rucket.update
-      erb :index
+      redirect '/status'
     end
 
-    get '/fans/:action' do
-      if params[:action] == 'on'
-        RucketServer.rucket.turn_on_fans
-      else
-        RucketServer.rucket.turn_off_fans
-      end
-      redirect '/'
+    get '/status' do
+      RucketServer.rucket.update
+      erb :status
     end
+
+    get '/fans' do
+      RucketServer.rucket.update
+      erb :fans
+    end
+
+    get "/fans/:name/toggle" do
+      RucketServer.rucket.fans[params[:name]].toggle
+      redirect "/fans"
+    end  
+
+    get '/lights' do
+      RucketServer.rucket.update
+      erb :lights
+    end
+
+    get "/lights/:name/toggle" do
+      RucketServer.rucket.lights[params[:name]].toggle
+      redirect "/lights"
+    end  
   end
 end

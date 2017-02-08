@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>RucketServer | Lights</title>
+    <meta http-equiv="refresh" content="300">
+  </head>
+  <body>
+    <a href="/status">STATUS</a> | <a href="/fans">FANS</a> | <a href="/control">CONTROL</a>
+    <br>
+    <% RucketServer.rucket.lights.each do |name, light| %>
+      <table>
+        <tr>
+          <th>Name<th>
+          <th><%= name %></th>
+        </tr>
+        <tr>
+          <th>Pin</th>
+          <th><%= light.pin.pin %></th>
+        </tr>
+        <tr>
+          <th>Status</th>
+          <th><%= (light.on? ? "On" : "Off") %></th>
+        </tr>
+        <tr>
+          <%= "<a href=\"/lights/#{name}/toggle\">Toggle</a>" %>
+        </tr>
+      </table>
+    <% end %>
+  </body>
+</html>
