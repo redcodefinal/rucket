@@ -34,12 +34,12 @@ module RucketServer
       redirect "/fans"
     end  
 
-    get '/lights' do
+    get '/lights' do 
       RucketServer.rucket.update
       erb :lights
     end
 
-    get "/lights/:name/toggle" do
+    get "/lights/:name/toggle" do |name|
       RucketServer.rucket.lights[name].toggle
       redirect "/lights"
     end  
