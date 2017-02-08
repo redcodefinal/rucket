@@ -40,7 +40,7 @@ module RucketServer
     end
 
     get "/lights/:name/toggle" do
-      RucketServer.rucket.lights[name]].toggle
+      RucketServer.rucket.lights[name].toggle
       redirect "/lights"
     end  
   end
