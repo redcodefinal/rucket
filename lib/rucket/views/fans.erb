@@ -7,18 +7,18 @@
     <a href="/status">STATUS</a> | <a href="/lights">LIGHTS</a> | <a href="/control">CONTROL</a>
     <br>
     <% RucketServer.rucket.fans.each do |name, fan| %>
-      <table>
+      <table border="1">
         <tr>
-          <th>Name<th>
-          <th><%= name %></th>
+          <td>Name<td>
+          <td><%= name %></td>
         </tr>
         <tr>
-          <th>Pin</th>
-          <th><%= fan.pin.pin %></th>
+          <td>Pin</td>
+          <td><%= fan.pin.pin %></td>
         </tr>
         <tr>
-          <th>Status</th>
-          <th><%= (fan.on? ? "On" : "Off") %></th>
+          <td>Status</td>
+          <td><%= (fan.on? ? "On" : "Off") %></td>
         </tr>
         <tr>
           <td><%= "<a href=\"/fans/#{name}/toggle\">Toggle</a>" %></td>
