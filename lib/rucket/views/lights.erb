@@ -6,24 +6,34 @@
   <body>
     <a href="/status">STATUS</a> | <a href="/fans">FANS</a> | <a href="/control">CONTROL</a>
     <br>
-    <% RucketServer.rucket.lights.each do |name, light| %>
-      <table border="1">
-        <tr>
-          <td>Name<td>
+    <table border="1">
+      <tr>
+        <% RucketServer.rucket.lights.each do |name, light| %>
+          <td><b>Name</b></td>
           <td><%= name %></td>
-        </tr>
-        <tr>
-          <td>Pin</td>
+          <td></td>
+        <% end %>
+      </tr>
+      <tr>
+        <% RucketServer.rucket.lights.each do |name, light| %>
+          <td><b>Pin</b></td>
           <td><%= light.pin.pin %></td>
-        </tr>
-        <tr>
-          <td>Status</td>
+          <td></td>
+        <% end %>
+      </tr>
+      <tr>
+        <% RucketServer.rucket.lights.each do |name, light| %>
+          <td><b>Status</b></td>
           <td><%= (light.on? ? "On" : "Off") %></td>
-        </tr>
-        <tr>
-          <td><%= "<a href=\"/lights/#{name}/toggle\">Toggle</a>" %></td>
-        </tr>
-      </table>
-    <% end %>
+          <td></td>
+        <% end %>
+      </tr>
+      <tr>
+        <% RucketServer.rucket.lights.each do |name, light| %>
+          <td colspan="2"><%= "<a href=\"/lights/#{name}/toggle\">Toggle</a>" %></td>
+          <td></td>
+        <% end %>
+      </tr>
+    </table>
   </body>
 </html>
