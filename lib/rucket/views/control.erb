@@ -35,11 +35,11 @@
           <%= "<form action=\"/modules\">" %>
             <tr>
               <td><b>Start</b></td>
-              <td><%= "<input type=\"number\" name=\"start_hour\" min=\"0\" max=\"24\" val=\"#{amodule.start_time.split(?:).first}\">:<input type=\"number\" name=\"start_minute\" min=\"0\" max=\"60\" val=\"#{amodule.start_time.split(?:).last}\"> "%></td>
+              <td><%= "<input type=\"number\" name=\"start_hour\" min=\"0\" max=\"24\" value=\"#{amodule.start_time.split(?:).first}\">:<input type=\"number\" name=\"start_minute\" min=\"0\" max=\"60\" value=\"#{amodule.start_time.split(?:).last}\"> "%></td>
             </tr>
             <tr>
               <td><b>End</b></td>
-              <td><%= "<input type=\"number\" name=\"end_hour\" min=\"0\" max=\"48\" val=\"#{amodule.end_time.split(?:).first}\">:<input type=\"number\" name=\"end_minute\" min=\"0\" max=\"60\" val=\"#{amodule.end_time.split(?:).last}\">" %></td>
+              <td><%= "<input type=\"number\" name=\"end_hour\" min=\"0\" max=\"48\" value=\"#{amodule.end_time.split(?:).first}\">:<input type=\"number\" name=\"end_minute\" min=\"0\" max=\"60\" value=\"#{amodule.end_time.split(?:).last}\">" %></td>
             </tr>
             <tr>
               <td colspan="2"><center><input type="submit"></center></td>
