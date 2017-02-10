@@ -43,5 +43,15 @@ module RucketServer
       RucketServer.rucket.lights[name.to_sym].toggle
       redirect "/lights"
     end  
+
+    get "/control" do
+      RucketServer.rucket.update
+      erb :control
+    end
+
+    post "/modules/:name" do |name|
+      puts params["start_hour"]
+      redirect "/control"
+    end
   end
 end

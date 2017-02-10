@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>RucketServer | Control</title>
+    <meta http-equiv="refresh" content="300">
+    <style>
+      input[type=number]{
+        width: 40px;
+      } 
+    </style>
+  </head>
+  <body>
+    <% RucketServer.rucket.modules.each do |name, module| %>
+      <% if module.is_a? DHT11Reader %>
+        <table border="1">
+          <caption>DHT11Reader</caption>
+          <tr>
+            <td><b>Name</b></td>
+            <td><%= name %></td>
+          </tr>
+          <tr>
+            <td><b>Pin</b></td>
+            <td><%= module.pin.pin %></td>
+          </tr>
+          <tr>
+            <td colspan="2"><center><%= "<a href=\"/modules/#{name}/toggle\">Toggle</a>" %></center></td>
+          </tr>
+        </table>
+      <% elsif module.is_a? Timer %>
+        <table border="1">
+          <caption>Timer</caption>
+          <tr>
+            <td><b>Name</b></td>
+            <td><%= name %></td>
+          </tr>
+          <%= "<form action=\"/modules\">" %>
+            <tr>
+              <td><b>Start</b></td>
+              <td><%= "<input type=\"number\" name=\"start_hour\" min=\"0\" max=\"24\" val=\"#{module.start_time.split(?:).first}\">:<input type=\"number\" name=\"start_minute\" min=\"0\" max=\"60\" val=\"#{module.start_time.split(?:).last}\"> "%></td>
+            </tr>
+            <tr>
+              <td><b>End</b></td>
+              <td><%= "<input type=\"number\" name=\"end_hour\" min=\"0\" max=\"48\" val=\"#{module.end_time.split(?:).first}\">:<input type=\"number\" name=\"end_minute\" min=\"0\" max=\"60\"> val=\"#{module.end_time.split(?:).last}\"" %></td>
+            </tr>
+            <tr>
+              <td colspan="2"><center><input type="submit"></center></td>
+            </tr>
+          </form>
+          <tr>
+            <td colspan="2"><center><%= "<a href=\"/modules/#{name}/toggle\">Toggle</a>" %></center></td>
+          </tr>
+        </table>
+      <% end %>
+    <end>
+  </body>
+</html>
