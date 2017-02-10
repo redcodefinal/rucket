@@ -24,4 +24,5 @@ class RucketModule
     else
       enable
     end
+  end
 end
