@@ -31,6 +31,7 @@ class Rucket
   MAX_ENTRIES = 30
   attr_reader :fans
   attr_reader :lights
+  attr_reader :modules
   
   def initialize(options = {}, &block)
     #RPi::GPIO.set_warnings false
