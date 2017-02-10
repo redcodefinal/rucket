@@ -20,9 +20,9 @@ class RucketModule
 
   def toggle
     if disabled?
-      disable
-    else
       enable
+    else
+      disable
     end
   end
 end
