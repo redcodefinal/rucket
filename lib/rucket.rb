@@ -68,7 +68,9 @@ class Rucket
 
 
   def update
-    @modules.values.each(&:main_loop)
+    @modules.values.each do |mod|
+      mod.main_loop unless mod.disabled?
+    end  
   end
 
   def [] i

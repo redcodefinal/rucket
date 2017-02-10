@@ -9,6 +9,8 @@
     </style>
   </head>
   <body>
+    <a href="/status">STATUS</a> | <a href="/fans">FANS</a> | <a href="/lights">LIGHTS</a>
+    <br>
     <% RucketServer.rucket.modules.each do |name, amodule| %>
       <% if amodule.is_a? DHT11Reader %>
         <table border="1">
@@ -16,6 +18,10 @@
           <tr>
             <td><b>Name</b></td>
             <td><%= name %></td>
+          </tr>
+          <tr>
+            <td><b>Disabled?</b></td>
+            <td><%= amodule.disabled? %></td>
           </tr>
           <tr>
             <td><b>Pin</b></td>
@@ -31,6 +37,10 @@
           <tr>
             <td><b>Name</b></td>
             <td><%= name %></td>
+          </tr>
+          <tr>
+            <td><b>Disabled?</b></td>
+            <td><%= amodule.disabled? %></td>
           </tr>
           <%= "<form action=\"/modules/#{name}\" method=\"post\">" %>
             <tr>

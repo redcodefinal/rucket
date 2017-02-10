@@ -56,7 +56,12 @@ module RucketServer
         RucketServer.rucket[name].end_time = "#{params["end_hour"]}:#{params["end_minute"]}"
       end
 
-      RucketServer.rucket.update
+      redirect "/control"
+    end
+
+    get "/modules/:name/toggle" do |name|
+      name = name.to_sym
+      RucketServer.rucket[name].toggle
 
       redirect "/control"
     end
