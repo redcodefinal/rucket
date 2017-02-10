@@ -60,9 +60,8 @@ module RucketServer
     end
 
     get "/modules/:name/toggle" do |name|
-      name = name.to_sym
-      RucketServer.rucket[name].toggle
-
+      RucketServer.rucket[name.to_sym].toggle
+      puts RucketServer.rucket[name.to_sym].disabled?
       redirect "/control"
     end
   end
