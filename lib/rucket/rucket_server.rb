@@ -50,13 +50,14 @@ module RucketServer
     end
 
     post "/modules/:name" do |name|
+      name = name.to_sym
       if RucketServer.rucket[name].is_a? Timer
         RucketServer.rucket[name].start_time = "#{params["start_hour"]}:#{params["start_minute"]}"
         RucketServer.rucket[name].end_time = "#{params["end_hour"]}:#{params["end_minute"]}"
       end
 
       RucketServer.rucket.update
-      
+
       redirect "/control"
     end
   end
