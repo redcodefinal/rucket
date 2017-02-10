@@ -32,7 +32,7 @@
             <td><b>Name</b></td>
             <td><%= name %></td>
           </tr>
-          <%= "<form action=\"/modules\">" %>
+          <%= "<form action=\"/modules/#{name}\">" %>
             <tr>
               <td><b>Start</b></td>
               <td><%= "<input type=\"number\" name=\"start_hour\" min=\"0\" max=\"24\" value=\"#{amodule.start_time.split(?:).first}\">:<input type=\"number\" name=\"start_minute\" min=\"0\" max=\"60\" value=\"#{amodule.start_time.split(?:).last}\"> "%></td>
@@ -50,6 +50,6 @@
           </tr>
         </table>
       <% end %>
-    <% end %>>
+    <% end %>
   </body>
 </html>
