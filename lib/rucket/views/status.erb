@@ -2,11 +2,11 @@
   <head>
     <title>RucketServer | Status</title>
     <meta http-equiv="refresh" content="300">
+    <script src="chartkick.js"></script>
   </head>
   <body>
     <a href="/fans">FANS</a> | <a href="/lights">LIGHTS</a> | <a href="/control">CONTROL</a>
     <br>
-    <script src="chartkick.js"></script>
     <%= line_chart [
           {name: "Temperature", data: RucketServer.rucket[:dht].temps},
           {name: "Humidity", data: RucketServer.rucket[:dht].humids},
