@@ -29,7 +29,9 @@ class DHT11Reader < RucketModule
       @humids << (humid = DhtSensor.read(pin, 11).humidity)
       @humids.slice!(0) if @humids.count > MAX_ENTRIES
       
-      chart = Gchart.new(type: "line",
+      
+      begin 
+        chart = Gchart.new(type: "line",
                    title: "DHT",
                    data: [@temps, @humids],
                    size: "400x150",
@@ -39,7 +41,9 @@ class DHT11Reader < RucketModule
                    axis_with_labels: ['Time', 'Value'],
                    axis_labels: [0..30].to_a,
                    max: 100)
-      chart.file
+        chart.file
+      rescue
+      end
 
       @temp = temp
       @humidity = humid
