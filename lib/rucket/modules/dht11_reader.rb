@@ -37,9 +37,31 @@ class DHT11Reader < RucketModule
       @temps[Time.now] = (temp = DhtSensor.read(pin, 11).temp_f)
       @temps.delete(@temps.first.first) if @temps.count > MAX_ENTRIES
 
+<<<<<<< HEAD
       @humids ||= {}
       @humids[Time.now] = (humid = DhtSensor.read(pin, 11).humidity)
       @humids.delete(@humids.first.first) if @humids.count > MAX_ENTRIES
+=======
+      @humids ||= []
+      @humids << (humid = DhtSensor.read(pin, 11).humidity)
+      @humids.slice!(0) if @humids.count > MAX_ENTRIES
+      
+      
+      begin 
+        chart = Gchart.new(type: "line",
+                   title: "DHT",
+                   data: [@temps, @humids],
+                   size: "400x150",
+                   filename: "/home/pi/rucket/lib/rucket/public/chart.png",
+                   line_colors: 'ff0000,0000ff',
+                   legend: ["Tempurature", "Humidity"],
+                   axis_with_labels: ['Time', 'Value'],
+                   axis_labels: [0..30].to_a,
+                   max: 100)
+        chart.file
+      rescue
+      end
+>>>>>>> 6fd4ada3da8afef43cf4fe7ab2c4a6bb7f27cae9
 
       @temp = temp
       @humidity = humid
