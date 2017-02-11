@@ -34,11 +34,11 @@ class DHT11Reader < RucketModule
     if (Time.now - last_update) > update_time
       @last_update = Time.now
       @temps ||= {}
-      @temps[Time.now] = (temp = DhtSensor.read(pin, 11).temp_f)
+      @temps[last_update] = (temp = DhtSensor.read(pin, 11).temp_f)
       @temps.delete(@temps.first.first) if @temps.count > MAX_ENTRIES
 
       @humids ||= {}
-      @humids[Time.now] = (humid = DhtSensor.read(pin, 11).humidity)
+      @humids[last_update] = (humid = DhtSensor.read(pin, 11).humidity)
       @humids.delete(@humids.first.first) if @humids.count > MAX_ENTRIES
 
       @temp = temp
