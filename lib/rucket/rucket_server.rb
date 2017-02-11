@@ -51,17 +51,21 @@ module RucketServer
 
     post "/modules/:name" do |name|
       name = name.to_sym
-      if RucketServer.rucket[name].is_a? Timer
-        RucketServer.rucket[name].start_time = "#{params["start_hour"]}:#{params["start_minute"]}"
-        RucketServer.rucket[name].end_time = "#{params["end_hour"]}:#{params["end_minute"]}"
+      mod = RucketServer.rucket[name]
+      if mod.is_a? Timer
+        mod.start_time = "#{params["start_hour"]}:#{params["start_minute"]}"
+        mod.end_time = "#{params["end_hour"]}:#{params["end_minute"]}"
       end
 
       redirect "/control"
     end
 
-    get "/modules/:name/toggle" do |name|
-      RucketServer.rucket[name.to_sym].toggle
-      puts RucketServer.rucket[name.to_sym].disabled?
+    get "/modules/:name/*" do |name|
+      action = params["splat"]
+      mod = RucketServer.rucket[name.to_sym]
+      if (action == "toggle" || (mod.is_a? Timer && (action == "turn_on" || action == "turn_off")))
+        mod.send(action)
+      end
       redirect "/control"
     end
   end

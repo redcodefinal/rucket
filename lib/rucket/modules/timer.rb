@@ -20,6 +20,16 @@ class Timer < RucketModule
     instance_exec &off_proc
   end  
 
+  def turn_on
+    instance_exec &on_proc
+    @on = true
+  end
+
+  def turn_off
+    instance_exec &off_proc
+    @on = false
+  end
+
   def off?
     not on?
   end
@@ -31,11 +41,9 @@ class Timer < RucketModule
     new_end_time = Time.parse(end_time)
 
     if (new_start_time..new_end_time).cover?(Time.now) and off?
-      instance_exec &on_proc
-      @on = true
+      turn_on
     elsif !(new_start_time..new_end_time).cover?(Time.now) and on?
-      instance_exec &off_proc
-      @on = false
+      turn_off
     end
   end
 end

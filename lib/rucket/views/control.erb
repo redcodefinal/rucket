@@ -52,6 +52,12 @@
               <td><%= "<input type=\"number\" name=\"end_hour\" min=\"0\" max=\"48\" value=\"#{amodule.end_time.split(?:).first}\">:<input type=\"number\" name=\"end_minute\" min=\"0\" max=\"60\" value=\"#{amodule.end_time.split(?:).last}\">" %></td>
             </tr>
             <tr>
+              <td colspan="2"><center><%= "<a href=\"/modules/#{name}/turn_on\">Turn On</a>" %></center></td>
+            </tr>
+            <tr>
+              <td colspan="2"><center><%= "<a href=\"/modules/#{name}/turn_off\">Turn Off</a>" %></center></td>
+            </tr>
+            <tr>
               <td colspan="2"><center><input type="submit"></center></td>
             </tr>
           </form>
