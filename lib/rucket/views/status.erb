@@ -6,7 +6,11 @@
   <body>
     <a href="/fans">FANS</a> | <a href="/lights">LIGHTS</a> | <a href="/control">CONTROL</a>
     <br>
-    <img src="chart.png"></img>
+    <script src="chartkick.js"></script>
+    <%= line_chart [
+          {name: "Temperature", data: RucketServer.rucket[:dht].temps},
+          {name: "Humidity", data: RucketServer.rucket[:dht].humids},
+     ], **DHT11Reader::CHART_OPTIONS %>
     <p>TEMP: <%= RucketServer.rucket[:dht].temp %>F   HUMIDITY: <%= RucketServer.rucket[:dht].humidity %>%  </p>
     <p>TIME: <%= Time.now %></p>
   </body>
