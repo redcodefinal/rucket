@@ -8,7 +8,7 @@ class DHT11Reader < RucketModule
   CHART_OPTIONS = {
     xtitle: "Time",
     ytitle: "Value",
-    legend: true,
+    legend: "bottom",
     height: "150px",
     width: "400px",
     colors: ["red", "blue"],
