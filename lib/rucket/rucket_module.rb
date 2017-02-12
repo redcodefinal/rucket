@@ -1,8 +1,7 @@
 class RucketModule
-  attr_reader :rucket
-  
-  def initialize(rucket)
-    @rucket = rucket
+  attr_reader :name
+  def initialize(name)
+    @name = name
     @disabled = false
   end
 

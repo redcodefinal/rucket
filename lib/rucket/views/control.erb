@@ -11,7 +11,7 @@
   <body>
     <a href="/status">STATUS</a> | <a href="/fans">FANS</a> | <a href="/lights">LIGHTS</a>
     <br>
-    <% RucketServer.rucket.modules.each do |name, amodule| %>
+    <% Rucket.modules.each do |name, amodule| %>
       <% if amodule.is_a? DHT11Reader %>
         <table border="1">
           <caption>DHT11Reader</caption>

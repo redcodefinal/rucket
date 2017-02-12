@@ -4,10 +4,9 @@ require 'erb'
 module RucketServer
   extend self
 
-  attr_reader :rucket
-
   def start &block
-    @rucket = Rucket.new &block
+    Rucket.start &block
+    Rucket::LOG.info "Starting Web Server!"
   end
 
   class App < Sinatra::Base
@@ -20,38 +19,37 @@ module RucketServer
     end
 
     get '/status' do
-      RucketServer.rucket.update
+      Rucket.update
       erb :status
     end
 
     get '/fans' do
-      RucketServer.rucket.update
+      Rucket.update
       erb :fans
     end
 
     get "/fans/:name/toggle" do |name|
-      RucketServer.rucket.fans[name.to_sym].toggle
+      Rucket.fans[name.to_sym].toggle
       redirect "/fans"
     end  
 
     get '/lights' do 
-      RucketServer.rucket.update
+      Rucket.update
       erb :lights
     end
 
     get "/lights/:name/toggle" do |name|
-      RucketServer.rucket.lights[name.to_sym].toggle
+      Rucket.lights[name.to_sym].toggle
       redirect "/lights"
     end  
 
     get "/control" do
-      RucketServer.rucket.update
+      Rucket.update
       erb :control
     end
 
     post "/modules/:name" do |name|
-      name = name.to_sym
-      mod = RucketServer.rucket[name]
+      mod = Rucket[name.to_sym]
       if mod.is_a? Timer
         mod.start_time = "#{params["start_hour"]}:#{params["start_minute"]}"
         mod.end_time = "#{params["end_hour"]}:#{params["end_minute"]}"
@@ -62,9 +60,12 @@ module RucketServer
 
     get "/modules/:name/*" do |name, splat|
       action = splat
-      mod = RucketServer.rucket[name.to_sym]
-      if (action == "toggle" || (mod.is_a?(Timer) && (action == "turn_on" || action == "turn_off")))
+      mod = Rucket[name.to_sym]
+      if action == "toggle"
         mod.send(action)
+      elsif mod.is_a?(Timer) && (action == "turn_on" || action == "turn_off")
+        mod.send(action)
+        mod.disable
       end
       redirect "/control"
     end

@@ -5,6 +5,7 @@ require_relative '../rucket_module'
 
 class DHT11Reader < RucketModule
   MAX_ENTRIES = 50
+
   CHART_OPTIONS = {
     xtitle: "Time",
     ytitle: "Value",
@@ -21,8 +22,8 @@ class DHT11Reader < RucketModule
   attr_reader :temp, :humidity
   attr_reader :temps, :humids
 
-  def initialize(rucket, pin = 4, update_time = 60*30)
-    super rucket
+  def initialize(name, pin = 4, update_time = 60*30)
+    super name
 
     @pin = pin
     @update_time = update_time
@@ -43,6 +44,7 @@ class DHT11Reader < RucketModule
 
       @temp = temp
       @humidity = humid
+      Rucket::LOG.info "DHT11Reader[#{name}]: Temp: #{temp} Humidity: #{humid}"
     end
   end
 end

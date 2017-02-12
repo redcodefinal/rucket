@@ -8,28 +8,28 @@
     <br>
     <table border="1">
       <tr>
-        <% RucketServer.rucket.lights.each do |name, light| %>
+        <% Rucket.lights.each do |name, light| %>
           <td><b>Name</b></td>
           <td><%= name %></td>
           <td></td>
         <% end %>
       </tr>
       <tr>
-        <% RucketServer.rucket.lights.each do |name, light| %>
+        <% Rucket.lights.each do |name, light| %>
           <td><b>Pin</b></td>
           <td><%= light.pin.pin %></td>
           <td></td>
         <% end %>
       </tr>
       <tr>
-        <% RucketServer.rucket.lights.each do |name, light| %>
+        <% Rucket.lights.each do |name, light| %>
           <td><b>Status</b></td>
           <td><%= (light.on? ? "On" : "Off") %></td>
           <td></td>
         <% end %>
       </tr>
       <tr>
-        <% RucketServer.rucket.lights.each do |name, light| %>
+        <% Rucket.lights.each do |name, light| %>
           <td colspan="2"><center><%= "<a href=\"/lights/#{name}/toggle\">Toggle</a>" %></center></td>
           <td></td>
         <% end %>
