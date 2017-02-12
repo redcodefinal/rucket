@@ -63,7 +63,7 @@ module RucketServer
     get "/modules/:name/*" do |name, splat|
       action = splat
       mod = RucketServer.rucket[name.to_sym]
-      if (action == "toggle" || (mod.is_a? Timer && (action == "turn_on" || action == "turn_off")))
+      if (action == "toggle" || (mod.is_a?(Timer) && (action == "turn_on" || action == "turn_off")))
         mod.send(action)
       end
       redirect "/control"
