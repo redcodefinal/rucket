@@ -9,7 +9,7 @@ RucketServer.start do
 
   on_proc = -> do
       Rucket.fans[:intake].turn_on
-      Rucket.fans[:exhaust]1.turn_on
+      Rucket.fans[:exhaust].turn_on
 
       Rucket.fans[:heatsink_fan].turn_on
       Rucket.lights[:main].turn_on
