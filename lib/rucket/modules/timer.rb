@@ -42,9 +42,9 @@ class Timer < RucketModule
     new_start_time = Time.parse(start_time)
     new_end_time = Time.parse(end_time)
 
-    if (new_start_time..new_end_time).cover?(Time.now) and off?
+    if (new_start_time..new_end_time).cover?(time) and off?
       turn_on
-    elsif !(new_start_time..new_end_time).cover?(Time.now) and on?
+    elsif !(new_start_time..new_end_time).cover?(time) and on?
       turn_off
     end
   end
