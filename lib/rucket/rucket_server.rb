@@ -71,6 +71,7 @@ module RucketServer
     end
 
     get "/logs" do
+      Rucket.update
       erb :logs
     end  
   end
