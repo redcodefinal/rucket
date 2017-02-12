@@ -14,10 +14,10 @@ module Rucket
   LOG = Logger.new(LOG_FILE)
   FORMAT = Logger::Formatter.new
   MAX_LOG_LINES = 100
-  logger.formatter = proc { |severity, datetime, progname, msg|
+  LOG.formatter = proc { |severity, datetime, progname, msg|
     log_line = Rucket::FORMAT.call(severity, datetime, progname, msg.dump)
-    @log_lines.unshift log_line
-    @log_lines.slice!(@log_lines.count-1) if @log_lines.count > MAX_LOG_LINES
+    Rucket.log_lines.unshift log_line
+    Ruket.log_lines.slice!(Rucket.log_lines.count-1) if Rucket.log_lines.count > MAX_LOG_LINES
   }
 
   LOG.info "Created log!"
