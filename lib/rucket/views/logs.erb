@@ -6,7 +6,6 @@
   <body>
     <a href="/status">STATUS</a> | <a href="/fans">FANS</a> | <a href="/lights">LIGHTS</a> | <a href="/control">CONTROL</a>
     <br>
-    <%= (file = File.open(Rucket::LOG_FILE.path)).each_line.to_a.reverse.join %>
-    <% file.close %>
+    <%= Rucket.log_lines.join %>
   </body>
 </html>

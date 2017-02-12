@@ -12,6 +12,14 @@ module Rucket
   FileUtils.mkdir_p(File.dirname(__FILE__) + '/../log/')
   LOG_FILE = File.new(File.dirname(__FILE__) + '/../log/' + name + '.log', 'w')
   LOG = Logger.new(LOG_FILE)
+  FORMAT = Logger::Formatter.new
+  MAX_LOG_LINES = 100
+  logger.formatter = proc { |severity, datetime, progname, msg|
+    log_line = Rucket::FORMAT.call(severity, datetime, progname, msg.dump)
+    @log_lines.unshift log_line
+    @log_lines.slice!(@log_lines.count-1) if @log_lines.count > MAX_LOG_LINES
+  }
+
   LOG.info "Created log!"
 
   module RucketMeta
@@ -31,6 +39,7 @@ module Rucket
   end
 
   private_constant :RucketMeta
+  attr_reader :log_lines
 
   attr_reader :fans
   attr_reader :lights
@@ -40,7 +49,8 @@ module Rucket
     #RPi::GPIO.set_warnings false
     RPi::GPIO.set_numbering :bcm
     RPi::GPIO.clean_up
-
+    @log_lines = []
+ 
     @fans = {}
     @lights = {}
     @modules = {}
