@@ -8,7 +8,6 @@ require_rel "rucket/*.rb"
 require_rel "rucket/modules/*.rb"
 
 module Rucket
-  extend self
   FileUtils.mkdir_p(File.dirname(__FILE__) + '/../log/')
   LOG_FILE = File.new(File.dirname(__FILE__) + '/../log/' + name + '.log', 'w')
   LOG = Logger.new(LOG_FILE)
@@ -21,6 +20,8 @@ module Rucket
   }
 
   LOG.info "Created log!"
+
+  extend self
 
   module RucketMeta
     extend self
