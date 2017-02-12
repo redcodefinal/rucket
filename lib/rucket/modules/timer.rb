@@ -23,11 +23,13 @@ class Timer < RucketModule
   def turn_on
     instance_exec &on_proc
     @on = true
+    disable
   end
 
   def turn_off
     instance_exec &off_proc
     @on = false
+    disable
   end
 
   def off?
