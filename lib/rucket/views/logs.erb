@@ -1,0 +1,11 @@
+<html>
+  <head>
+    <title>RucketServer | Logs</title>
+    <meta http-equiv="refresh" content="300">
+  </head>
+  <body>
+    <a href="/status">STATUS</a> | <a href="/fans">FANS</a> | <a href="/lights">LIGHTS</a> | <a href="/control">CONTROL</a>
+    <br>
+    <%= LOG_FILE.each_line.to_a.reverse.join %>
+  </body>
+</html>

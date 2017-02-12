@@ -69,5 +69,9 @@ module RucketServer
       end
       redirect "/control"
     end
+
+    get "/logs" do
+      erb :logs
+    end  
   end
 end
