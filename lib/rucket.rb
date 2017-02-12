@@ -19,8 +19,6 @@ module Rucket
     Ruket.log_lines.slice!(Rucket.log_lines.count-1) if Rucket.log_lines.count > MAX_LOG_LINES
   }
 
-  LOG.info "Created log!"
-
   extend self
 
   module RucketMeta
