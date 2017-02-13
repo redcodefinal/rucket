@@ -12,7 +12,6 @@
           {name: "Temperature", data: Rucket[:dht].temps},
           {name: "Humidity", data: Rucket[:dht].humids},
      ], **DHT11Reader::CHART_OPTIONS %>
-    <p>TEMP: <%= Rucket[:dht].temp %>F   HUMIDITY: <%= Rucket[:dht].humidity %>%  </p>
-    <p>TIME: <%= Time.now %></p>
+    <p>TEMP: <%= Rucket[:dht].temp %>F   HUMIDITY: <%= Rucket[:dht].humidity %>%  TIME: <%= Time.now %></p>
   </body>
 </html>

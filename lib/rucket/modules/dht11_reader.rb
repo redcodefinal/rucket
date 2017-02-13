@@ -10,7 +10,7 @@ class DHT11Reader < RucketModule
     xtitle: "Time",
     ytitle: "Value",
     legend: "bottom",
-    height: "150px",
+    height: "200px",
     width: "400px",
     colors: ["red", "blue"],
     min: 0,
