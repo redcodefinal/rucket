@@ -16,7 +16,7 @@ module Rucket
   LOG.formatter = proc { |severity, datetime, progname, msg|
     log_line = Rucket::FORMAT.call(severity, datetime, progname, msg.dump)
     Rucket.log_lines.unshift log_line
-    Ruket.log_lines.slice!(Rucket.log_lines.count-1) if Rucket.log_lines.count > MAX_LOG_LINES
+    Rucket.log_lines.slice!(Rucket.log_lines.count-1) if Rucket.log_lines.count > MAX_LOG_LINES
     log_line
   }
 
